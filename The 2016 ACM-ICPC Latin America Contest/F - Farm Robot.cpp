@@ -16,6 +16,6 @@ int main() {
         }
     }
     farm[pos]++;
-    printf("%d",farm[s - 1]);
+    printf("%d\n",farm[s - 1]);
     return 0;
 }

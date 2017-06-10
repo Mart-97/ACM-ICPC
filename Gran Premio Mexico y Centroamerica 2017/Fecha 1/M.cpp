@@ -19,6 +19,17 @@ typedef pair<ii,string> iis;
 typedef vector<ii> vii;
 typedef vector<ll> vi;
 vi primes;
+ll expBin(ll a,ll n){
+  if(n == 0) return 1;
+  if(n == 1) return a;
+  ll nextPow = expBin(a, n/2);
+  nextPow = (nextPow * nextPow); /// % MOD
+  if(n % 2 == 0)
+    return nextPow;
+  return (nextPow * a); /// % MOD
+}
+
+
 bool isprime[2*MAXN];
 void criba(){
   ///memset(isprime,true,sizeof isprime);
@@ -42,10 +53,10 @@ ll sumDiv(ll n){
       n /= PF; 
       power++;
     }
-    ans*= ((ll)pow((double)PF,power + 1.0)-1) / (PF - 1); 
+    ans*= (expBin(PF,power + 1)-1) / (PF - 1); 
     PF = primes[++pf_idx];
   }
-  if(n != 1) ans*= ((ll)pow((double)n,2.0)-1) / (n - 1); 
+  if(n != 1) ans*= (expBin(n,2)-1) / (n - 1); 
   return ans;
 }
 int main(){
